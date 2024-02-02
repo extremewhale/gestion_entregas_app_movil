@@ -13,6 +13,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.REGISTER,
       page: () => RegisterPage(),
-    )
+    ),
+    
   ];
 }

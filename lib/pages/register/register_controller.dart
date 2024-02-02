@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:gestion_entrega_app/models/user.dart';
 import 'package:gestion_entrega_app/provider/usersProvider.dart';
 import 'package:gestion_entrega_app/routers/app_routes.dart';
@@ -5,6 +6,12 @@ import 'package:gestion_entrega_app/utils/dio_client.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController lastnameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmpasswordController = TextEditingController();
   final UsersProvider _usersProvider =
       Get.put(UsersProvider(DioClient().instance));
 
