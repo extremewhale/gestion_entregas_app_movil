@@ -10,7 +10,7 @@ import 'package:get_storage/get_storage.dart';
 class LoginController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  GetxStorageController _getxStorage = GetxStorageController(); // Usa tu clase
+  GetxStorageController _getxStorage = GetxStorageController(); 
 
   final UsersProvider usersProvider =
       Get.put(UsersProvider(DioClient().instance));
