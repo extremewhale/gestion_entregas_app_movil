@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'dart:ffi';
+
+import 'package:gestion_entrega_app/models/rol.dart';
 
 User? userFromJson(String str) => User.fromJson(json.decode(str));
 
@@ -13,6 +16,7 @@ class User {
   String? password;
   String? sessionToken;
   String? image;
+  List<Rol>? roles = [];
   List<User> toList = [];
 
   User(
@@ -23,7 +27,8 @@ class User {
       this.phone,
       this.password,
       this.sessionToken,
-      this.image});
+      this.image,
+      this.roles});
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"] is int ? json['id'].toString() : json["id"],
@@ -34,6 +39,9 @@ class User {
         password: json["password"],
         sessionToken: json["session_token"],
         image: json["image"],
+        roles: json["roles"] == null
+            ? []
+            : List<Rol>.from(json["roles"].map((model) => Rol.fromJson(model))),
       );
   User.fromJsonList(List<dynamic> jsonList) {
     if (jsonList == null) return;
@@ -52,15 +60,6 @@ class User {
         "password": password,
         "session_token": sessionToken,
         "image": image,
+        "roles": roles,
       };
-  static User get empty => User(
-        id: '',
-        email: '',
-        name: '',
-        lastname: '',
-        phone: '',
-        password: '',
-        sessionToken: '',
-        image: '',
-      );
 }
