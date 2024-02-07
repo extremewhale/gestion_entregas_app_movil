@@ -4,7 +4,7 @@ import 'package:gestion_entrega_app/pages/delivery/orders/list/delivery_orders_l
 import 'package:gestion_entrega_app/pages/login/login_page.dart';
 
 import 'package:gestion_entrega_app/pages/register/register_page.dart';
-import 'package:gestion_entrega_app/pages/splashScreen/splashscreen_name.dart';
+import 'package:gestion_entrega_app/pages/splashScreen/slashscrren.dart';
 import 'package:gestion_entrega_app/pages/store/orders/list/store_orders_list_page.dart';
 import 'package:gestion_entrega_app/routers/app_routes.dart';
 import 'package:get/get.dart';
@@ -29,7 +29,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.SPLASHSCREEN,
-      page: () => SplashScreenPage(),
+      page: () => SplashScreen(),
     ),
     GetPage(
       name: AppRoutes.StoreOrdersList,

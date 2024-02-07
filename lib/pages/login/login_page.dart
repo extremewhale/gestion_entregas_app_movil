@@ -34,7 +34,7 @@ class LoginPage extends StatelessWidget {
                       issuffixIcon: false,
                     ),
                     MyTextField(
-                      hintText: 'contraseña',
+                      hintText: 'Contraseña',
                       textEditingController: _con.passwordController,
                       obscureText: true,
                       icon: Icon(
