@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 
 import 'package:gestion_entrega_app/models/response_api.dart';
 import 'package:gestion_entrega_app/models/user.dart';
+import 'package:path/path.dart';
 
 class UsersProvider {
   Dio? _dio;
@@ -36,6 +38,32 @@ class UsersProvider {
     } catch (e) {
       print('Error : $e');
       return null;
+    }
+  }
+
+  Future<Stream?> createWithImage(User user, File? image) async {
+    try {
+      final Map<String, dynamic> headers = {'Content-type': 'application/json'};
+      FormData formData = FormData.fromMap({
+        'user': json.encode(user),
+        if (image != null)
+          'image': await MultipartFile.fromFile(
+            image.path,
+            filename: basename(image.path),
+          ),
+      });
+      final response = await _dio!.post('$_endpoint/create',
+          data: formData,
+          options: Options(
+            headers: headers,
+          ));
+      return Stream.fromIterable([json.encode(response.data)]);
+    } on DioException catch (e) {
+      if (e.response!.statusCode == 404) {
+        print(e.response!.statusCode);
+      } else {
+        print(e.message);
+      }
     }
   }
 

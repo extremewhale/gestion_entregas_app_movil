@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:gestion_entrega_app/models/user.dart';
+import 'package:gestion_entrega_app/routers/app_pages.dart';
+import 'package:gestion_entrega_app/routers/app_routes.dart';
 import 'package:gestion_entrega_app/utils/getx_storage.dart';
 import 'package:get/get.dart';
 
 class ClientProductsCategoriesController extends GetxController {
-  String onSelect = '';
+  RxString onSelect = ''.obs;
+  Rx<User?> user = Rx<User?>(null);
+
   GetxStorageController _getxStorage = GetxStorageController(); // Usa tu clase
+
+  void onInit() async {
+    _loadUserData();
+    super.onInit();
+  }
+
+  Future<void> _loadUserData() async {
+    user.value = User.fromJson(await _getxStorage.read('user'));
+  }
 
   void logout() {
     _getxStorage.logout(Get.context!);
@@ -20,7 +34,7 @@ class ClientProductsCategoriesController extends GetxController {
       ));
       print('ups $page');
     } else {
-      print('esta es la pagina $page');
+      Get.offNamed(AppRoutes.ClientProductsList);
     }
   }
 }

@@ -3,7 +3,7 @@ import 'package:gestion_entrega_app/config/environments.dart';
 
 class DioClient {
   Dio? _dio;
-  Duration duration = Duration(milliseconds: 5000);
+  Duration duration = Duration(milliseconds: 10000);
 
   DioClient() {
     _dio = Dio();

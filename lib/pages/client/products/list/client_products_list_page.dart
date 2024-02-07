@@ -20,6 +20,10 @@ class ClientProductsListPage extends StatelessWidget {
         DrawerItem(title: 'mi negocio', icon: Icons.store, onTap: () {}),
         DrawerItem(
             title: 'repartidor', icon: Icons.delivery_dining, onTap: () {}),
+        DrawerItem(
+            title: 'cerrar sesion',
+            icon: Icons.exit_to_app,
+            onTap: _con.logout),
       ]),
       body: Center(
         child: ElevatedButton(
