@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "815606140545",
+    "project_id": "gestion-entrega-app",
+    "storage_bucket": "gestion-entrega-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815606140545:android:656d1964ea29cfa0a50780",
+        "android_client_info": {
+          "package_name": "com.example.gestion_entrega_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyFgHi5QtiT25qhN0H9C1usjDn__gHFtY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

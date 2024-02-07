@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gestion_entrega_app/pages/login/login_controller.dart';
-import 'package:gestion_entrega_app/widgets/myButtom.dart';
-import 'package:gestion_entrega_app/widgets/myTextField.dart';
+import 'package:gestion_entrega_app/widgets/myWidgets.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -27,7 +26,6 @@ class LoginPage extends StatelessWidget {
                       hintText: 'Correo electronico',
                       textEditingController: _con.emailController,
                       obscureText: false,
-                      color: Colors.red,
                       icon: Icon(
                         Icons.email,
                         color: Colors.red,
@@ -39,7 +37,6 @@ class LoginPage extends StatelessWidget {
                       hintText: 'contraseña',
                       textEditingController: _con.passwordController,
                       obscureText: true,
-                      color: Colors.red,
                       icon: Icon(
                         Icons.lock,
                         color: Colors.red,
@@ -47,12 +44,9 @@ class LoginPage extends StatelessWidget {
                       isPrefixIcon: true,
                       issuffixIcon: false,
                     ),
-                    MyButtom(
-                        textButtom: 'Ingresar',
-                        color: Colors.red,
-                        function: () {}),
+                    MyButtom(textButtom: 'Ingresar', function: _con.login),
                     _textDontHaveAccount(
-                      function: _con.login,
+                      function: _con.goToRegisterPage,
                     )
                   ],
                 ),
@@ -114,8 +108,8 @@ class _lottieAnimation extends StatelessWidget {
 }
 
 class _textDontHaveAccount extends StatelessWidget {
-  Function function;
-  _textDontHaveAccount({super.key, required this.function});
+  VoidCallback function;
+  _textDontHaveAccount({required this.function});
 
   @override
   Widget build(BuildContext context) {
@@ -124,17 +118,17 @@ class _textDontHaveAccount extends StatelessWidget {
       children: [
         Text('¿No tienes cuenta?',
             style: TextStyle(
-                color: const Color.fromARGB(255, 255, 255, 255), fontSize: 17)),
+                color: Color.fromARGB(255, 167, 166, 166), fontSize: 17)),
         const SizedBox(
           width: 7,
         ),
         GestureDetector(
-          onTap: function(),
+          onTap: function,
           child: Text(
             'Registrate',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: const Color.fromARGB(255, 255, 255, 254),
+                color: Color.fromARGB(255, 124, 124, 124),
                 fontSize: 17),
           ),
         )

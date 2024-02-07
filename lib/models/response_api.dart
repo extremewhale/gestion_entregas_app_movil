@@ -1,7 +1,6 @@
 // To parse this JSON data, do
 //
 //     final responseApi = responseApiFromJson(jsonString);
-
 import 'dart:convert';
 
 ResponseApi responseApiFromJson(String str) =>
@@ -14,13 +13,10 @@ class ResponseApi {
   String? error;
   bool? success;
   dynamic data;
-
   ResponseApi({this.message, this.error, this.success, this.data});
-
   ResponseApi.fromJson(Map<String, dynamic> json)
-      : message =
-            json["message"] ?? "Default message", // Assuming default message
-        error = json["error"] ?? "Default error", // Assuming default error
+      : message = json["message"] ?? "Default message",
+        error = json["error"] ?? "Default error",
         success = json["success"] {
     try {
       data = json["data"];

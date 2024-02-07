@@ -4,7 +4,8 @@ class MyTextField extends StatelessWidget {
   String hintText = "";
   TextEditingController textEditingController;
   bool obscureText;
-  Color color;
+  TextInputType? textInputType;
+
   bool isPrefixIcon;
   bool issuffixIcon;
   Icon icon;
@@ -14,9 +15,9 @@ class MyTextField extends StatelessWidget {
     required this.hintText,
     required this.textEditingController,
     required this.obscureText,
-    required this.color,
     required this.isPrefixIcon,
     required this.issuffixIcon,
+    this.textInputType,
     required this.icon,
   });
 
@@ -27,13 +28,14 @@ class MyTextField extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.red.shade100, borderRadius: BorderRadius.circular(30)),
       child: TextField(
+          keyboardType: textInputType,
           obscureText: obscureText,
           controller: textEditingController,
           decoration: InputDecoration(
             hintText: hintText,
             border: InputBorder.none,
             contentPadding: const EdgeInsets.all(15),
-            hintStyle: TextStyle(color: color),
+            hintStyle: TextStyle(color: Colors.red),
             prefixIcon: isPrefixIcon ? icon : null,
             suffixIcon: issuffixIcon ? icon : null,
           )),

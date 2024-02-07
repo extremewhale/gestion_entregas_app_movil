@@ -3,7 +3,7 @@ import 'package:gestion_entrega_app/config/environments.dart';
 
 class DioClient {
   Dio? _dio;
-  Duration duration = Duration(milliseconds: 5000);
+  Duration duration = Duration(milliseconds: 10000);
 
   DioClient() {
     _dio = Dio();
@@ -11,8 +11,10 @@ class DioClient {
     _dio!.options.connectTimeout = duration; // 5 segundos
     // Agrega headers comunes si es necesario
     _dio!.options.headers = {'Content-Type': 'application/json'};
+    _dio!.options.validateStatus = (status) {
+      return status == 401 || status! >= 200 && status < 300;
+    };
   }
-  
 
   Dio get instance => _dio!;
 }
