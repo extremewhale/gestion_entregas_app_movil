@@ -17,7 +17,7 @@ class MyCustomDrawer extends StatelessWidget {
         children: [
           Obx(() => DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Colors.red,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +37,6 @@ class MyCustomDrawer extends StatelessWidget {
                         fontSize: 13,
                         color: Colors.grey.shade300,
                         fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic,
                       ),
                       maxLines: 1,
                     ),
@@ -47,7 +46,6 @@ class MyCustomDrawer extends StatelessWidget {
                         fontSize: 13,
                         color: Colors.grey.shade300,
                         fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic,
                       ),
                       maxLines: 1,
                     ),
