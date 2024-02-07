@@ -49,17 +49,26 @@ class MyCustomDrawer extends StatelessWidget {
                       ),
                       maxLines: 1,
                     ),
-                    FadeInImage(
-                      height: 60,
-                      width: 80,
-                      placeholder: const AssetImage('assets/img/no-image.png'),
-                      image: _con.user()?.image != null
-                          ? NetworkImage(_con.user()!.image ?? '')
-                              as ImageProvider
-                          : const AssetImage('assets/img/no-image.png'),
-                      fit: BoxFit.cover,
-                      fadeInDuration: const Duration(milliseconds: 50),
-                    ),
+                    Container(
+                      width: 65,
+                      height: 65,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(40),
+                        child: FadeInImage(
+                          height: 80,
+                          width: 80,
+                          placeholder: const AssetImage('assets/img/no-image.png'),
+                          image: _con.user()?.image != null
+                              ? NetworkImage(_con.user()!.image ?? '') as ImageProvider
+                              : const AssetImage('assets/img/no-image.png'),
+                          fit: BoxFit.fill,
+                          fadeInDuration: const Duration(milliseconds: 50),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               )),

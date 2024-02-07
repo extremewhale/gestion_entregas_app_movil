@@ -19,14 +19,14 @@ class ClientProductsCategoriesPage extends StatelessWidget {
         title: Text('Seleccione una categoria'),
       ),
       drawer: MyCustomDrawer(items: [
-        DrawerItem(title: 'mi Perfil', icon: Icons.person, onTap: () {}),
-        DrawerItem(title: 'mis Pedidos', icon: Icons.list, onTap: () {}),
-        DrawerItem(title: 'mis direcciones', icon: Icons.map, onTap: () {}),
-        DrawerItem(title: 'mi negocio', icon: Icons.store, onTap: () {}),
+        DrawerItem(title: 'Mi Perfil', icon: Icons.person, onTap: () {}),
+        DrawerItem(title: 'Pedidos', icon: Icons.list, onTap: () {}),
+        DrawerItem(title: 'Direcciones', icon: Icons.map, onTap: () {}),
+        DrawerItem(title: 'Negocio', icon: Icons.store, onTap: () {}),
         DrawerItem(
-            title: 'repartidor', icon: Icons.delivery_dining, onTap: () {}),
+            title: 'Repartidor', icon: Icons.delivery_dining, onTap: () {}),
         DrawerItem(
-            title: 'cerrar sesion',
+            title: 'Cerrar Sesión',
             icon: Icons.exit_to_app,
             onTap: _con.logout),
       ]),
