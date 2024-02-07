@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Delivery',
+      title: 'HOLA',
       initialRoute: AppRoutes.LOGIN,
       getPages: AppPages.pages,
     );
