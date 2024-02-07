@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -20,9 +21,11 @@ class RegisterController extends GetxController {
   TextEditingController confirmpasswordController = TextEditingController();
   final UsersProvider usersProvider =
       Get.put(UsersProvider(DioClient().instance));
-  File? imageFile;
+  Rx<File?> imageFile = Rx<File?>(null);
   ProgressDialog? _progressDialog;
   bool isEnable = true;
+  PickedFile? pickedFile;
+
   @override
   void onInit() {
     _progressDialog = ProgressDialog(context: Get.context);
@@ -55,6 +58,10 @@ class RegisterController extends GetxController {
       MySnackbar.show('La contraseña debe tener al menos 6 caracteres');
       return;
     }
+    if (imageFile.value == null) {
+      MySnackbar.show('Selecciona una imagen');
+      return;
+    }
     _progressDialog!.show(max: 100, msg: 'Espere un momento ...');
     isEnable = false;
     User user = new User(
@@ -65,19 +72,33 @@ class RegisterController extends GetxController {
         password: password);
 
     try {
-      ResponseApi? responseApi = await usersProvider.create(user);
-      if (responseApi == null) {
-        MySnackbar.show('Respuesta nula del servidor');
-        return;
+      Stream? stream =
+          await usersProvider.createWithImage(user, imageFile.value);
+      StringBuffer completeResponse = StringBuffer();
+
+      await for (var value in stream!) {
+        completeResponse.write(value);
       }
-      print('Respuesta: ${responseApi!.toJson()}');
-      _progressDialog!.close();
-      MySnackbar.show(responseApi.message!);
-      if (responseApi.success!) {
-        Future.delayed(const Duration(seconds: 3), () {
-          Get.offNamed(AppRoutes.LOGIN);
-        });
-      } else {
+
+      try {
+        ResponseApi responseApi =
+            ResponseApi.fromJson(json.decode(completeResponse.toString()));
+        print('Este es el mensaje: ${responseApi}');
+        _progressDialog!.close();
+        MySnackbar.show(responseApi.message!);
+
+        if (responseApi.success == true) {
+          Future.delayed(const Duration(seconds: 3), () {
+            Get.offAllNamed(AppRoutes.LOGIN);
+          });
+        } else {
+          isEnable = true;
+        }
+      } catch (e) {
+        // Handle JSON decoding error
+        print('Error decoding JSON response: $e');
+        _progressDialog!.close();
+        MySnackbar.show('Error al procesar los datos: $e');
         isEnable = true;
       }
     } catch (e) {
@@ -98,7 +119,7 @@ class RegisterController extends GetxController {
   Future selectImage(ImageSource imageSource) async {
     XFile? pickedFile = await ImagePicker().pickImage(source: imageSource);
     if (pickedFile != null) {
-      imageFile = File(pickedFile.path);
+      imageFile.value = File(pickedFile.path);
     }
     Get.back();
   }

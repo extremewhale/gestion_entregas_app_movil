@@ -27,7 +27,7 @@ class RegisterPage extends StatelessWidget {
               child: Column(
                 children: [
                   _imageUser(
-                    function: () {},
+                    function: _con.showAlertDialog,
                   ),
                   SizedBox(
                     height: 30,
@@ -160,21 +160,26 @@ class _iconBack extends StatelessWidget {
 }
 
 class _imageUser extends StatelessWidget {
-  VoidCallback function;
-  File? imageFile;
-  _imageUser({super.key, required this.function, this.imageFile});
+  final VoidCallback function;
+
+  _imageUser({super.key, required this.function});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: function,
-      child: CircleAvatar(
-        backgroundImage: imageFile != null
-            ? FileImage(imageFile!)
-            : const AssetImage('assets/img/user_profile_2.png')
-                as ImageProvider,
-        radius: 60,
-        backgroundColor: Colors.grey.shade200,
+      child: Obx(
+        () {
+          final _con = Get.find<RegisterController>();
+          return CircleAvatar(
+            backgroundImage: _con.imageFile.value != null
+                ? FileImage(_con.imageFile.value!)
+                : const AssetImage('assets/img/user_profile_2.png')
+                    as ImageProvider,
+            radius: 60,
+            backgroundColor: Colors.grey.shade200,
+          );
+        },
       ),
     );
   }

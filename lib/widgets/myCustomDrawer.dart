@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:gestion_entrega_app/controllers/UserController.dart';
+import 'package:gestion_entrega_app/models/user.dart';
 import 'package:get/get.dart';
 
 class MyCustomDrawer extends StatelessWidget {
+  final UserController _con = Get.find<UserController>();
   final List<DrawerItem> items;
 
   MyCustomDrawer({required this.items});
@@ -12,57 +15,63 @@ class MyCustomDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors
-                    .blue, // Puedes ajustar el color según tus preferencias
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'user name lastname',
-                    style: const TextStyle(
+          Obx(() => DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${_con.user()?.name ?? ''} ${_con.user()?.lastname ?? ''}',
+                      style: const TextStyle(
                         fontSize: 18,
                         color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                    maxLines: 1,
-                  ),
-                  Text(
-                    'correo@gmail.com',
-                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 1,
+                    ),
+                    Text(
+                      _con.user()?.email ?? '',
+                      style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey.shade300,
                         fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic),
-                    maxLines: 1,
-                  ),
-                  Text(
-                    'telefono',
-                    style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                      ),
+                      maxLines: 1,
+                    ),
+                    Text(
+                      _con.user()?.phone ?? '',
+                      style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey.shade300,
                         fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic),
-                    maxLines: 1,
-                  ),
-                  FadeInImage(
-                    height: 60,
-                    width: 80,
-                    placeholder: const AssetImage('assets/img/no-image.png'),
-                    image: AssetImage('assets/img/no-image.png'),
-                    fit: BoxFit.cover,
-                    fadeInDuration: const Duration(milliseconds: 50),
-                  ),
-                ],
+                        fontStyle: FontStyle.italic,
+                      ),
+                      maxLines: 1,
+                    ),
+                    FadeInImage(
+                      height: 60,
+                      width: 80,
+                      placeholder: const AssetImage('assets/img/no-image.png'),
+                      image: _con.user()?.image != null
+                          ? NetworkImage(_con.user()!.image ?? '')
+                              as ImageProvider
+                          : const AssetImage('assets/img/no-image.png'),
+                      fit: BoxFit.cover,
+                      fadeInDuration: const Duration(milliseconds: 50),
+                    ),
+                  ],
+                ),
               )),
           ...items.map((item) {
             return ListTile(
-              leading: Icon(item.icon), // Agrega un icono a la izquierda
+              leading: Icon(item.icon),
               title: Text(item.title),
               onTap: () {
                 item.onTap();
-                Get.back(); // Cierra el Drawer
+                Get.back();
               },
             );
           }).toList(),

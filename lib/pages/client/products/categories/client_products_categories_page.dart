@@ -39,6 +39,7 @@ class ClientProductsCategoriesPage extends StatelessWidget {
               CubixD(
                 size: 200.0,
                 onSelected: (SelectedSide opt, Vector2 delta) {
+                  _con.goToPage(opt);
                   print(
                       'On selected callback:\n\topt = ${opt}\n\tdelta = ${delta}');
                 },
