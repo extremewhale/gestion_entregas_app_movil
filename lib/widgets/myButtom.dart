@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class MyButtom extends StatelessWidget {
   String textButtom = "";
-  Color color;
-  Function function;
 
-  MyButtom({super.key, required this.textButtom, required this.color , required this.function});
+  VoidCallback function;
+
+  MyButtom({super.key, required this.textButtom, required this.function});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class MyButtom extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
       child: ElevatedButton(
-        onPressed: function(),
+        onPressed: function,
         style: ElevatedButton.styleFrom(
             backgroundColor: Colors.red,
             shape:
@@ -21,7 +21,7 @@ class MyButtom extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 15)),
         child: Text(
           textButtom,
-          style: TextStyle(color: color),
+          style: TextStyle(color: Colors.white),
         ),
       ),
     );
