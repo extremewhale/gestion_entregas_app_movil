@@ -14,11 +14,11 @@ class SplashScreenController extends GetxController {
   void onInit() async {
     var userData = await _getxStorage.read('user');
     if (userData == null) {
-      Get.offAllNamed(AppRoutes.LOGIN);
       print("No user data in shared preferences.");
+      Get.offAllNamed(AppRoutes.LOGIN);
     } else {
       User user = User.fromJson(await _getxStorage.read('user') ?? {});
-      print('Usuario : ${user.toString()}');
+      print('Usuario : ${user.toJson()}');
 
       if (user.sessionToken != null) {
         Get.offAllNamed(AppRoutes.ClientProductsCategories);

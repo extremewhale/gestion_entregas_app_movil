@@ -37,18 +37,18 @@ class GetxStorageController extends GetxController {
   }
 
   void logout(BuildContext context) async {
-    // UsersProvider usersProvider = UsersProvider(DioClient().instance);
-    // try {
-    //   final userIdValue = await read('user');
-    //   if (userIdValue != null) {
-    //     userId.value = userIdValue['id'];
-    //     await usersProvider.logout(userId.value);
-    await remove('user');
-    //     userId.value = '';
-    Get.offNamed(AppRoutes.LOGIN);
-    //   }
-    // } catch (e) {
-    //   print('Error during logout: $e');
-    // }
+    UsersProvider usersProvider = UsersProvider(DioClient().instance);
+    try {
+      final userIdValue = await read('user');
+      if (userIdValue != null) {
+        userId.value = userIdValue['id'];
+        await usersProvider.logout(userId.value);
+        await remove('user');
+        userId.value = '';
+        Get.offNamed(AppRoutes.LOGIN);
+      }
+    } catch (e) {
+      print('Error during logout: $e');
+    }
   }
 }

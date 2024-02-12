@@ -99,7 +99,10 @@ class RegisterPage extends StatelessWidget {
                     isPrefixIcon: true,
                     issuffixIcon: false,
                   ),
-                  MyButtom(textButtom: 'Registrate', function: _con.register),
+                  MyButtom(
+                      textButtom: 'Registrate',
+                      isEnable: _con.isEnable,
+                      function: _con.register),
                 ],
               ),
             ),

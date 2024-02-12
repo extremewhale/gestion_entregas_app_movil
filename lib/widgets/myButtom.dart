@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 
 class MyButtom extends StatelessWidget {
   String textButtom = "";
+  bool isEnable = true;
 
   VoidCallback function;
 
-  MyButtom({super.key, required this.textButtom, required this.function});
+  MyButtom(
+      {super.key,
+      required this.textButtom,
+      required this.function,
+      required this.isEnable});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +18,7 @@ class MyButtom extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
       child: ElevatedButton(
-        onPressed: function,
+        onPressed: isEnable ? function : null,
         style: ElevatedButton.styleFrom(
             backgroundColor: Colors.red,
             shape:

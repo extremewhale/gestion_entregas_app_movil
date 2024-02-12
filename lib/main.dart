@@ -26,10 +26,6 @@ class MainApp extends StatelessWidget {
       title: 'Delivery',
       initialRoute: AppRoutes.SPLASHSCREEN,
       getPages: AppPages.pages,
-      initialBinding: BindingsBuilder(() {
-        Get.put(
-            UserController()); // Inicializa el controlador global de usuario
-      }),
     );
   }
 }
