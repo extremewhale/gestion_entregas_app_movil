@@ -4,7 +4,7 @@ import 'package:gestion_entrega_app/models/user.dart';
 import 'package:get/get.dart';
 
 class MyCustomDrawer extends StatelessWidget {
-  final UserController _con = Get.find<UserController>();
+  final UserController _con = Get.put(UserController());
   final List<DrawerItem> items;
 
   MyCustomDrawer({required this.items});
@@ -23,7 +23,7 @@ class MyCustomDrawer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${_con.user()?.name ?? ''} ${_con.user()?.lastname ?? ''}',
+                      '${_con.user.value?.name ?? ''} ${_con.user.value!.lastname ?? ''}',
                       style: const TextStyle(
                         fontSize: 18,
                         color: Colors.white,
@@ -41,7 +41,7 @@ class MyCustomDrawer extends StatelessWidget {
                       maxLines: 1,
                     ),
                     Text(
-                      _con.user()?.phone ?? '',
+                      _con.user.value!.phone ?? '',
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey.shade300,
@@ -49,26 +49,17 @@ class MyCustomDrawer extends StatelessWidget {
                       ),
                       maxLines: 1,
                     ),
-                    Container(
-                      width: 65,
-                      height: 65,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(40),
-                        child: FadeInImage(
-                          height: 80,
-                          width: 80,
-                          placeholder: const AssetImage('assets/img/no-image.png'),
-                          image: _con.user()?.image != null
-                              ? NetworkImage(_con.user()!.image ?? '') as ImageProvider
-                              : const AssetImage('assets/img/no-image.png'),
-                          fit: BoxFit.fill,
-                          fadeInDuration: const Duration(milliseconds: 50),
-                        ),
-                      ),
-                    )
+                    FadeInImage(
+                      height: 60,
+                      width: 80,
+                      placeholder: const AssetImage('assets/img/no-image.png'),
+                      image: _con.user.value!.image != null
+                          ? NetworkImage(_con.user.value!.image ?? '')
+                              as ImageProvider
+                          : const AssetImage('assets/img/no-image.png'),
+                      fit: BoxFit.cover,
+                      fadeInDuration: const Duration(milliseconds: 50),
+                    ),
                   ],
                 ),
               )),
@@ -78,7 +69,7 @@ class MyCustomDrawer extends StatelessWidget {
               title: Text(item.title),
               onTap: () {
                 item.onTap();
-                Get.back();
+                //Get.back();
               },
             );
           }).toList(),
@@ -91,7 +82,7 @@ class MyCustomDrawer extends StatelessWidget {
 class DrawerItem {
   final String title;
   final IconData icon;
-  final Function onTap;
+  final VoidCallback onTap;
 
   DrawerItem({required this.title, required this.icon, required this.onTap});
 }

@@ -44,7 +44,10 @@ class LoginPage extends StatelessWidget {
                       isPrefixIcon: true,
                       issuffixIcon: false,
                     ),
-                    MyButtom(textButtom: 'Ingresar', function: _con.login),
+                    MyButtom(
+                        textButtom: 'Ingresar',
+                        isEnable: true,
+                        function: _con.login),
                     _textDontHaveAccount(
                       function: _con.goToRegisterPage,
                     )

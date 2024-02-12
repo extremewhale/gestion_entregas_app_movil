@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:gestion_entrega_app/models/category.dart';
+import 'package:gestion_entrega_app/pages/client/drawerClient/client_drawer_page.dart';
 import 'package:gestion_entrega_app/pages/client/products/categories/client_products_categories_controller.dart';
 import 'package:gestion_entrega_app/widgets/myCustomDrawer.dart';
 import 'package:get/get.dart';
@@ -18,108 +20,20 @@ class ClientProductsCategoriesPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Seleccione una categoria'),
       ),
-      drawer: MyCustomDrawer(items: [
-        DrawerItem(title: 'Mi Perfil', icon: Icons.person, onTap: () {}),
-        DrawerItem(title: 'Pedidos', icon: Icons.list, onTap: () {}),
-        DrawerItem(title: 'Direcciones', icon: Icons.map, onTap: () {}),
-        DrawerItem(title: 'Negocio', icon: Icons.store, onTap: () {}),
-        DrawerItem(
-            title: 'Repartidor', icon: Icons.delivery_dining, onTap: () {}),
-        DrawerItem(
-            title: 'Cerrar Sesión',
-            icon: Icons.exit_to_app,
-            onTap: _con.logout),
-      ]),
+      drawer: ClientDrawerPage(),
       body: Container(
         margin: EdgeInsets.all(1),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CubixD(
-                size: 200.0,
-                onSelected: (SelectedSide opt, Vector2 delta) {
-                  _con.goToPage(opt);
-                  print(
-                      'On selected callback:\n\topt = ${opt}\n\tdelta = ${delta}');
-                },
-                // onSelected: (side, delta) {
-                //   switch (side) {
-                //     case SelectedSide.back:
-                //       _con.onSelect = '1';
-                //       _con.goToPage(_con.onSelect);
-
-                //     case SelectedSide.top:
-                //       _con.onSelect = '2';
-                //       _con.goToPage(_con.onSelect);
-
-                //     case SelectedSide.front:
-                //       _con.onSelect = '3';
-                //       _con.goToPage(_con.onSelect);
-
-                //     case SelectedSide.bottom:
-                //       _con.onSelect = '4';
-                //       _con.goToPage(_con.onSelect);
-
-                //     case SelectedSide.right:
-                //       _con.onSelect = '5';
-                //       _con.goToPage(_con.onSelect);
-
-                //     case SelectedSide.left:
-                //       _con.onSelect = '6';
-                //       _con.goToPage(_con.onSelect);
-
-                //     case SelectedSide.none:
-                //       _con.onSelect = 'none';
-                //       _con.goToPage(_con.onSelect);
-
-                //     default:
-                //       throw Exception("Unimplemented option");
-                //   }
-                // },
-                delta: Vector2(pi / 4, pi / 4),
-                top: Container(
-                  child: Center(
-                    child: Text('TOP'),
-                  ),
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 255, 0, 0)),
-                ),
-                bottom: Container(
-                  child: Center(
-                    child: Text('BOTTOM'),
-                  ),
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 72, 156, 46)),
-                ),
-                right: Container(
-                  child: Center(
-                    child: Text('RIGHT'),
-                  ),
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 18, 182, 223)),
-                ),
-                left: Container(
-                  child: Center(
-                    child: Text('LEFT'),
-                  ),
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 135, 17, 204)),
-                ),
-                front: Container(
-                  child: Center(
-                    child: Text('FRONT'),
-                  ),
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 239, 255, 8)),
-                ),
-                back: Container(
-                  child: Center(
-                    child: Text('BACK'),
-                  ),
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 161, 66, 66)),
-                ),
+              Obx(
+                () => _con.ismincategories.value
+                    ? _cubix(
+                        con: _con,
+                        categorias: _con.categories,
+                      )
+                    : _cubixPlaceholder(),
               ),
               SizedBox(
                 height: 20,
@@ -127,6 +41,150 @@ class ClientProductsCategoriesPage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _cubix extends StatelessWidget {
+  final List<Category?>? categorias;
+  _cubix(
+      {super.key,
+      required ClientProductsCategoriesController con,
+      this.categorias})
+      : _con = con;
+
+  final ClientProductsCategoriesController _con;
+
+  @override
+  Widget build(BuildContext context) {
+    return CubixD(
+      size: 200.0,
+      // onSelected: (SelectedSide opt, Vector2 delta) {
+
+      //   _con.goToPage(opt);
+
+      //   print('On selected callback:\n\topt = ${opt}\n\tdelta = ${delta}');
+      // },
+      onSelected: (side, delta) {
+        switch (side) {
+          case SelectedSide.top:
+            _con.goToPage(categorias?[0]?.id ?? '-1');
+          case SelectedSide.bottom:
+            _con.goToPage(categorias?[1]?.id ?? '-1');
+          case SelectedSide.right:
+            _con.goToPage(categorias?[2]?.id ?? '-1');
+          case SelectedSide.left:
+            _con.goToPage(categorias?[3]?.id ?? '-1');
+          case SelectedSide.front:
+            _con.goToPage(categorias?[4]?.id ?? '-1');
+          case SelectedSide.back:
+            _con.goToPage(categorias?[5]?.id ?? '-1');
+          case SelectedSide.none:
+            _con.goToPage('-2');
+          default:
+            throw Exception("Unimplemented option");
+        }
+      },
+      delta: Vector2(pi / 4, pi / 4),
+      top: Container(
+        child: Center(
+          child: Text(categorias?[0]?.name ?? 'Nombre no disponible'),
+        ),
+        decoration: const BoxDecoration(color: Color.fromARGB(255, 255, 0, 0)),
+      ),
+      bottom: Container(
+        child: Center(
+          child: Text(categorias?[1]?.name ?? 'Nombre no disponible'),
+        ),
+        decoration:
+            const BoxDecoration(color: Color.fromARGB(255, 72, 156, 46)),
+      ),
+      right: Container(
+        child: Center(
+          child: Text(categorias?[2]?.name ?? 'Nombre no disponible'),
+        ),
+        decoration:
+            const BoxDecoration(color: Color.fromARGB(255, 18, 182, 223)),
+      ),
+      left: Container(
+        child: Center(
+          child: Text(categorias?[3]?.name ?? 'Nombre no disponible'),
+        ),
+        decoration:
+            const BoxDecoration(color: Color.fromARGB(255, 135, 17, 204)),
+      ),
+      front: Container(
+        child: Center(
+          child: Text(categorias?[4]?.name ?? 'Nombre no disponible'),
+        ),
+        decoration:
+            const BoxDecoration(color: Color.fromARGB(255, 239, 255, 8)),
+      ),
+      back: Container(
+        child: Center(
+          child: Text(categorias?[5]?.name ?? 'Nombre no disponible'),
+        ),
+        decoration:
+            const BoxDecoration(color: Color.fromARGB(255, 161, 66, 66)),
+      ),
+    );
+  }
+}
+
+class _cubixPlaceholder extends StatelessWidget {
+  _cubixPlaceholder({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CubixD(
+      size: 200.0,
+      onSelected: (SelectedSide opt, Vector2 delta) {
+        print('On selected callback:\n\topt = ${opt}\n\tdelta = ${delta}');
+      },
+      delta: Vector2(pi / 4, pi / 4),
+      top: Container(
+        child: Center(
+          child: Text('TOP'),
+        ),
+        decoration: const BoxDecoration(color: Color.fromARGB(255, 255, 0, 0)),
+      ),
+      bottom: Container(
+        child: Center(
+          child: Text('BOTTOM'),
+        ),
+        decoration:
+            const BoxDecoration(color: Color.fromARGB(255, 72, 156, 46)),
+      ),
+      right: Container(
+        child: Center(
+          child: Text('RIGHT'),
+        ),
+        decoration:
+            const BoxDecoration(color: Color.fromARGB(255, 18, 182, 223)),
+      ),
+      left: Container(
+        child: Center(
+          child: Text('LEFT'),
+        ),
+        decoration:
+            const BoxDecoration(color: Color.fromARGB(255, 135, 17, 204)),
+      ),
+      front: Container(
+        child: Center(
+          child: Text('FRONT'),
+        ),
+        decoration:
+            const BoxDecoration(color: Color.fromARGB(255, 239, 255, 8)),
+      ),
+      back: Container(
+        child: Center(
+          child: Text('BACK'),
+        ),
+        decoration:
+            const BoxDecoration(color: Color.fromARGB(255, 161, 66, 66)),
       ),
     );
   }
