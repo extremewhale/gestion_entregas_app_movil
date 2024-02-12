@@ -64,3 +64,4 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+final _con = Get.put(SplashScreenController());
