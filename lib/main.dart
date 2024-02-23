@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:gestion_entrega_app/controllers/UserController.dart';
 
 import 'package:gestion_entrega_app/routers/app_pages.dart';
 import 'package:gestion_entrega_app/routers/app_routes.dart';
@@ -20,6 +19,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
       ),

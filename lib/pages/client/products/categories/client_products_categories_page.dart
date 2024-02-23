@@ -4,25 +4,31 @@ import 'package:flutter/material.dart';
 import 'package:gestion_entrega_app/models/category.dart';
 import 'package:gestion_entrega_app/pages/client/drawerClient/client_drawer_page.dart';
 import 'package:gestion_entrega_app/pages/client/products/categories/client_products_categories_controller.dart';
-import 'package:gestion_entrega_app/widgets/myCustomDrawer.dart';
 import 'package:get/get.dart';
 import 'package:vector_math/vector_math_64.dart' show Vector2;
 import 'package:cubixd/cubixd.dart';
-import 'package:flutter/material.dart';
 
 class ClientProductsCategoriesPage extends StatelessWidget {
   const ClientProductsCategoriesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _con = Get.put(ClientProductsCategoriesController());
     return Scaffold(
       appBar: AppBar(
-        title: Text('Seleccione una categoria'),
+        backgroundColor: Colors.red,
+        title: const Text(
+          'Seleccione una categoria',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Anta',
+          ),
+        ),
       ),
-      drawer: ClientDrawerPage(),
+      drawer: const ClientDrawerPage(),
       body: Container(
-        margin: EdgeInsets.all(1),
+        margin: const EdgeInsets.all(1),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -33,9 +39,9 @@ class ClientProductsCategoriesPage extends StatelessWidget {
                         con: _con,
                         categorias: _con.categories,
                       )
-                    : _cubixPlaceholder(),
+                    : const _cubixPlaceholder(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
             ],
@@ -46,9 +52,11 @@ class ClientProductsCategoriesPage extends StatelessWidget {
   }
 }
 
+// ignore: camel_case_types
 class _cubix extends StatelessWidget {
   final List<Category?>? categorias;
-  _cubix(
+  const _cubix(
+      // ignore: unused_element
       {super.key,
       required ClientProductsCategoriesController con,
       this.categorias})
@@ -88,103 +96,210 @@ class _cubix extends StatelessWidget {
       },
       delta: Vector2(pi / 4, pi / 4),
       top: Container(
-        child: Center(
-          child: Text(categorias?[0]?.name ?? 'Nombre no disponible'),
+        height: 250,
+        width: 250,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black,
+            width: 1
+          ),
+          image: const DecorationImage(
+            image: AssetImage('assets/img/tecnologia.png'),
+          ),
+          color: const Color.fromARGB(255, 255, 0, 0),
         ),
-        decoration: const BoxDecoration(color: Color.fromARGB(255, 255, 0, 0)),
+        child: Center(
+          child: Stack(
+            children: [
+              Text(categorias?[0]?.name ?? 'Nombre no disponible', 
+                style: TextStyle(
+                  fontSize: 35,
+                  foreground: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 2
+                  ..color = Colors.black,
+                  fontFamily: 'Anta'),
+              ),
+              Text(categorias?[0]?.name ?? 'Nombre no disponible', 
+                style: const TextStyle(
+                  fontSize: 35,
+                  color: Colors.white,
+                  fontFamily: 'Anta'),
+              ),
+            ],
+          ),
+        ),
       ),
       bottom: Container(
+        height: 250,
+        width: 250,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black,
+            width: 1
+          ),
+          color: const Color.fromARGB(255, 72, 156, 46)),
         child: Center(
           child: Text(categorias?[1]?.name ?? 'Nombre no disponible'),
         ),
-        decoration:
-            const BoxDecoration(color: Color.fromARGB(255, 72, 156, 46)),
       ),
       right: Container(
-        child: Center(
-          child: Text(categorias?[2]?.name ?? 'Nombre no disponible'),
+        height: 250,
+        width: 250,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black,
+            width: 1
+          ),
+          image: const DecorationImage(
+            image: AssetImage('assets/img/hogar.png'),
+          ),
+          color: const Color.fromARGB(255, 18, 182, 223),
         ),
-        decoration:
-            const BoxDecoration(color: Color.fromARGB(255, 18, 182, 223)),
+        child: Center(
+          child: Stack(
+            children: [
+              Text(categorias?[2]?.name ?? 'Nombre no disponible', 
+                style: TextStyle(
+                  fontSize: 35,
+                  foreground: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 2
+                  ..color = Colors.black,
+                  fontFamily: 'Carrington'),
+              ),
+              Text(categorias?[2]?.name ?? 'Nombre no disponible', 
+                style: const TextStyle(
+                  fontSize: 35,
+                  color: Colors.white,
+                  fontFamily: 'Carrington'),
+              ),
+            ],
+          ),
+        ),
       ),
       left: Container(
+        height: 250,
+        width: 250,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black,
+            width: 1
+          ),
+          color: const Color.fromARGB(255, 135, 17, 204),
+        ),
         child: Center(
           child: Text(categorias?[3]?.name ?? 'Nombre no disponible'),
         ),
-        decoration:
-            const BoxDecoration(color: Color.fromARGB(255, 135, 17, 204)),
       ),
       front: Container(
-        child: Center(
-          child: Text(categorias?[4]?.name ?? 'Nombre no disponible'),
+        height: 250,
+        width: 250,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black,
+            width: 1
+          ),
+          image: const DecorationImage(
+            image: AssetImage('assets/img/juguete.png'),
+          ),
+          color: const Color.fromARGB(255, 239, 255, 8),
         ),
-        decoration:
-            const BoxDecoration(color: Color.fromARGB(255, 239, 255, 8)),
+        child: Center(
+          child: Stack(
+            children: [
+              Text(
+                categorias?[4]?.name ?? 'Nombre no disponible', 
+                style: TextStyle(
+                  fontSize: 35,
+                  foreground: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 2
+                  ..color = Colors.black,
+                  fontFamily: 'Garden'),
+              ),
+              Text(
+                categorias?[4]?.name ?? 'Nombre no disponible', 
+                style: const TextStyle(
+                  fontSize: 35,
+                  color: Colors.white,
+                  fontFamily: 'Garden'),
+              ),
+            ],
+          ),
+        ),
       ),
       back: Container(
+        height: 250,
+        width: 250,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black,
+            width: 1
+          ),
+          color: const Color.fromARGB(255, 161, 66, 66),
+        ),
         child: Center(
           child: Text(categorias?[5]?.name ?? 'Nombre no disponible'),
         ),
-        decoration:
-            const BoxDecoration(color: Color.fromARGB(255, 161, 66, 66)),
       ),
     );
   }
 }
 
+// ignore: camel_case_types
 class _cubixPlaceholder extends StatelessWidget {
-  _cubixPlaceholder({
-    super.key,
-  });
+  const _cubixPlaceholder();
 
   @override
   Widget build(BuildContext context) {
     return CubixD(
       size: 200.0,
       onSelected: (SelectedSide opt, Vector2 delta) {
+        // ignore: avoid_print, unnecessary_brace_in_string_interps
         print('On selected callback:\n\topt = ${opt}\n\tdelta = ${delta}');
       },
       delta: Vector2(pi / 4, pi / 4),
       top: Container(
-        child: Center(
+        decoration: const BoxDecoration(color: Color.fromARGB(255, 255, 0, 0)),
+        child: const Center(
           child: Text('TOP'),
         ),
-        decoration: const BoxDecoration(color: Color.fromARGB(255, 255, 0, 0)),
       ),
       bottom: Container(
-        child: Center(
-          child: Text('BOTTOM'),
-        ),
         decoration:
             const BoxDecoration(color: Color.fromARGB(255, 72, 156, 46)),
+        child: const Center(
+          child: Text('BOTTOM'),
+        ),
       ),
       right: Container(
-        child: Center(
-          child: Text('RIGHT'),
-        ),
         decoration:
             const BoxDecoration(color: Color.fromARGB(255, 18, 182, 223)),
+        child: const Center(
+          child: Text('RIGHT'),
+        ),
       ),
       left: Container(
-        child: Center(
-          child: Text('LEFT'),
-        ),
         decoration:
             const BoxDecoration(color: Color.fromARGB(255, 135, 17, 204)),
+        child: const Center(
+          child: Text('LEFT'),
+        ),
       ),
       front: Container(
-        child: Center(
-          child: Text('FRONT'),
-        ),
         decoration:
             const BoxDecoration(color: Color.fromARGB(255, 239, 255, 8)),
+        child: const Center(
+          child: Text('FRONT'),
+        ),
       ),
       back: Container(
-        child: Center(
-          child: Text('BACK'),
-        ),
         decoration:
             const BoxDecoration(color: Color.fromARGB(255, 161, 66, 66)),
+        child: const Center(
+          child: Text('BACK'),
+        ),
       ),
     );
   }

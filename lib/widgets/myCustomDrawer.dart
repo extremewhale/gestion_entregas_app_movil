@@ -23,7 +23,7 @@ class MyCustomDrawer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${_con.user.value?.name ?? ''} ${_con.user.value!.lastname ?? ''}',
+                      '${_con.user.value?.name ?? ''} ${_con.user.value?.lastname ?? ''}',
                       style: const TextStyle(
                         fontSize: 18,
                         color: Colors.white,
@@ -41,7 +41,7 @@ class MyCustomDrawer extends StatelessWidget {
                       maxLines: 1,
                     ),
                     Text(
-                      _con.user.value!.phone ?? '',
+                      _con.user.value?.phone ?? '',
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey.shade300,
@@ -53,8 +53,8 @@ class MyCustomDrawer extends StatelessWidget {
                       height: 60,
                       width: 80,
                       placeholder: const AssetImage('assets/img/no-image.png'),
-                      image: _con.user.value!.image != null
-                          ? NetworkImage(_con.user.value!.image ?? '')
+                      image: _con.user.value?.image != null
+                          ? NetworkImage(_con.user.value?.image ?? '')
                               as ImageProvider
                           : const AssetImage('assets/img/no-image.png'),
                       fit: BoxFit.cover,
