@@ -28,7 +28,14 @@ class ClientProductsCategoriesPage extends StatelessWidget {
       ),
       drawer: const ClientDrawerPage(),
       body: Container(
-        margin: const EdgeInsets.all(1),
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/img/fondo.png"),
+            fit: BoxFit.fill)
+        ),
+        margin: const EdgeInsets.all(0),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -104,7 +111,7 @@ class _cubix extends StatelessWidget {
             width: 1
           ),
           image: const DecorationImage(
-            image: AssetImage('assets/img/tecnologia.png'),
+            image: AssetImage('assets/img/electronica.png'),
           ),
           color: const Color.fromARGB(255, 255, 0, 0),
         ),
@@ -138,9 +145,30 @@ class _cubix extends StatelessWidget {
             color: Colors.black,
             width: 1
           ),
+          image: const DecorationImage(
+            image: AssetImage('assets/img/ropa.png'),
+          ),
           color: const Color.fromARGB(255, 72, 156, 46)),
         child: Center(
-          child: Text(categorias?[1]?.name ?? 'Nombre no disponible'),
+          child: Stack(
+            children: [
+              Text(categorias?[1]?.name ?? 'Nombre no disponible', 
+                style: TextStyle(
+                  fontSize: 35,
+                  foreground: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 2
+                  ..color = Colors.black,
+                  fontFamily: 'Anta'),
+              ),
+              Text(categorias?[1]?.name ?? 'Nombre no disponible', 
+                style: const TextStyle(
+                  fontSize: 35,
+                  color: Colors.white,
+                  fontFamily: 'Anta'),
+              ),
+            ],
+          ),
         ),
       ),
       right: Container(
@@ -186,10 +214,31 @@ class _cubix extends StatelessWidget {
             color: Colors.black,
             width: 1
           ),
+          image: const DecorationImage(
+            image: AssetImage('assets/img/deportes.png'),
+          ),
           color: const Color.fromARGB(255, 135, 17, 204),
         ),
         child: Center(
-          child: Text(categorias?[3]?.name ?? 'Nombre no disponible'),
+          child: Stack(
+            children: [
+              Text(categorias?[3]?.name ?? 'Nombre no disponible', 
+                style: TextStyle(
+                  fontSize: 35,
+                  foreground: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 2
+                  ..color = Colors.black,
+                  fontFamily: 'Anta'),
+              ),
+              Text(categorias?[3]?.name ?? 'Nombre no disponible', 
+                style: const TextStyle(
+                  fontSize: 35,
+                  color: Colors.white,
+                  fontFamily: 'Anta'),
+              ),
+            ],
+          ),
         ),
       ),
       front: Container(
@@ -237,10 +286,33 @@ class _cubix extends StatelessWidget {
             color: Colors.black,
             width: 1
           ),
+          image: const DecorationImage(
+            image: AssetImage('assets/img/libros.png'),
+          ),
           color: const Color.fromARGB(255, 161, 66, 66),
         ),
         child: Center(
-          child: Text(categorias?[5]?.name ?? 'Nombre no disponible'),
+          child: Stack(
+            children: [
+              Text(
+                categorias?[5]?.name ?? 'Nombre no disponible', 
+                style: TextStyle(
+                  fontSize: 35,
+                  foreground: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 2
+                  ..color = Colors.black,
+                  fontFamily: 'Garden'),
+              ),
+              Text(
+                categorias?[5]?.name ?? 'Nombre no disponible', 
+                style: const TextStyle(
+                  fontSize: 35,
+                  color: Colors.white,
+                  fontFamily: 'Garden'),
+              ),
+            ],
+          ),
         ),
       ),
     );
