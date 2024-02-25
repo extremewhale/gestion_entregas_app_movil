@@ -207,14 +207,17 @@ class _cubix extends StatelessWidget {
     );
   }
 
-  Widget _buildImageFace(String text, String imagePath, Color backgroundColor, TextStyle textStyle) {
+Widget _buildImageFace(String text, String imagePath, Color backgroundColor, TextStyle textStyle) {
   return Container(
+    width: 200,
+    height: 200,
+    decoration: BoxDecoration(color: backgroundColor),
     child: Stack(
       fit: StackFit.expand,
       children: [
         Image.asset(
           imagePath,
-          fit: BoxFit.cover,
+          fit: BoxFit.cover, // Ajusta la imagen dentro del tamaño 200x200
         ),
         Center(
           child: Text(
@@ -227,7 +230,6 @@ class _cubix extends StatelessWidget {
         ),
       ],
     ),
-    decoration: BoxDecoration(color: backgroundColor),
   );
 }
 
